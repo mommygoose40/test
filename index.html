@@ -1,0 +1,49 @@
+<div id="debug" style="white-space:pre; background:#eee; padding:10px; margin:10px; font-size:14px;"></div>
+
+<script>
+function debug(msg) {
+  document.getElementById("debug").textContent += msg + "\n";
+}
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import { getStorage, ref, uploadString } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-storage.js";
+
+debug("Loading Firebase SDK...");
+
+// === 初始化 Firebase ===
+const firebaseConfig = {
+  apiKey: "AIzaSyA4IZ6yZxlOuIjarWmUtIHGyLk84056K2Q",
+  authDomain: "reportsystem-c5fc7.firebaseapp.com",
+  projectId: "reportsystem-c5fc7",
+  storageBucket: "reportsystem-c5fc7.firebasestorage.app",
+  messagingSenderId: "845064058181",
+  appId: "1:845064058181:web:31d2f0fa6dfed084befa2c",
+};
+
+const app = initializeApp(firebaseConfig);
+debug("Firebase initialized.");
+
+// === 建立 Storage ===
+let storage;
+try {
+  storage = getStorage(app);
+  debug("Storage created successfully.");
+} catch (e) {
+  debug("Storage creation FAILED: " + e.message);
+}
+
+// === 測試是否能上傳 ===
+debug("Preparing upload test...");
+
+const testRef = ref(storage, "debug_test.txt");
+
+uploadString(testRef, "Hello Storage Test")
+  .then(() => {
+    debug("Upload SUCCESS!");
+  })
+  .catch((err) => {
+    debug("Upload FAILED: " + err.message);
+  });
+</script>
