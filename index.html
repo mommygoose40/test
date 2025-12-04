@@ -17,7 +17,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyA4IZ6yZxlOuIjarWmUtIHGyLk84056K2Q",
   authDomain: "reportsystem-c5fc7.firebaseapp.com",
   projectId: "reportsystem-c5fc7",
-  storageBucket: "reportsystem-c5fc7.firebasestorage.app",
+  storageBucket: "reportsystem-c5fc7.appspot.com",   // ★★★ 就改這裡 ★★★
   messagingSenderId: "845064058181",
   appId: "1:845064058181:web:31d2f0fa6dfed084befa2c",
 };
@@ -36,7 +36,6 @@ try {
 
 // === 測試是否能上傳 ===
 debug("Preparing upload test...");
-
 const testRef = ref(storage, "debug_test.txt");
 
 uploadString(testRef, "Hello Storage Test")
@@ -47,3 +46,4 @@ uploadString(testRef, "Hello Storage Test")
     debug("Upload FAILED: " + err.message);
   });
 </script>
+
